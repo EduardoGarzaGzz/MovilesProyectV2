@@ -59,7 +59,7 @@
 		android:layout_marginBottom = "8dp"
 		android:text = "Bienvenidos"
 		android:textAlignment = "center"
-		android:textColor = "@android:color/black"
+		android:textColor = "@android:color/white"
 		android:textSize = "30sp"
 		android:textStyle = "bold"
 		app:layout_constraintBottom_toTopOf = "@+id/btn_main_login"
