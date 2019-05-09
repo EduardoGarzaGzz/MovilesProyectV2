@@ -2,17 +2,21 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <group android:checkableBehavior="single">
         <item
-			android:id="@+id/menu_seccion_1"
+			android:id="@+id/menu_dashbord"
 			android:icon="@drawable/ic_launcher_background"
-			android:title="Opcion"/>
+			android:title="Dashbord"/>
         <item
-			android:id="@+id/menu_seccion_2"
+			android:id="@+id/menu_proyectos"
 			android:icon="@drawable/ic_launcher_background"
-			android:title="Opcion"/>
+			android:title="Proyectos"/>
         <item
-			android:id="@+id/menu_seccion_3"
+			android:id="@+id/menu_citas"
 			android:icon="@drawable/ic_launcher_background"
-			android:title="Opcion"/>
+			android:title="Citas"/>
+		 <item
+			 android:id="@+id/menu_social"
+			 android:icon="@drawable/ic_launcher_background"
+			 android:title="Social"/>
     </group>
  
     <item

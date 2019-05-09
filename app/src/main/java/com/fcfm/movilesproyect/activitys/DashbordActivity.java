@@ -1,9 +1,11 @@
 package com.fcfm.movilesproyect.activitys;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
+
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
@@ -12,14 +14,17 @@ import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.adapters.PagerAdapter;
-import com.fcfm.movilesproyect.fragments.DashbordFragment;
+import com.fcfm.movilesproyect.adapters.PagerDashbordAdapter;
+
 import com.fcfm.movilesproyect.models.User;
 
 
 public class DashbordActivity extends AppCompatActivity {
+	
+	private Context this_context;
 	
 	private DrawerLayout   drawerLayout;
 	private NavigationView navigationView;
@@ -30,8 +35,12 @@ public class DashbordActivity extends AppCompatActivity {
 		setContentView( R.layout.activity_dashbord );
 		setToolbar( );
 		
+		this.this_context = this;
+		
 		this.drawerLayout = ( DrawerLayout ) findViewById( R.id.drawer_dashbord_layout );
 		this.navigationView = ( NavigationView ) findViewById( R.id.nav_dashbord_view );
+		
+		this.navigationView.getMenu( ).getItem( 0 ).setChecked( true );
 		
 		// TODO definir el fragmento por defecto
 	}
@@ -63,25 +72,23 @@ public class DashbordActivity extends AppCompatActivity {
 					@Override
 					public boolean onNavigationItemSelected( @NonNull MenuItem menuItem ) {
 						
-						boolean  fragment_trsnsaction = false;
-						Fragment fragment             = null;
-						
 						switch ( menuItem.getItemId( ) ) {
 							// TODO agregar las opciones de Navigation Drawer
-							
-							/*
-							 * case R.id.opcion:
-							 * 	fragment = new FragmentOpcion();
-							 * 	fragmentTransaction = true;
-							 * 	break;
-							 *
-							 * */
+							case R.id.menu_dashbord:
+								Toast.makeText( this_context, "Ya estas en el Dashbord",
+												Toast.LENGTH_LONG ).show( );
+								break;
+							case R.id.menu_proyectos:
+								startActivity( new Intent( this_context,
+								                           ProyectosDashbordActivity.class ) );
+								finish();
+							case R.id.menu_citas:
+								startActivity(
+										new Intent( this_context, CitasDashbordActivity.class ) );
+								finish( );
+								break;
 						}
 						
-						if ( fragment_trsnsaction == true ) {
-							changeFragment( fragment, menuItem );
-							drawerLayout.closeDrawers( );
-						}
 						
 						return true;
 					}
@@ -91,7 +98,7 @@ public class DashbordActivity extends AppCompatActivity {
 	private void setToolbar( ) {
 		
 		Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
-		toolbar.setTitle( "Bienvenido " + User.getUser_active().getNombres() );
+		toolbar.setTitle( "Bienvenido " + User.getUser_active( ).getNombres( ) );
 		setSupportActionBar( toolbar );
 		getSupportActionBar( ).setHomeAsUpIndicator( R.drawable.ic_buerger_menu );
 		getSupportActionBar( ).setDisplayHomeAsUpEnabled( true );
@@ -104,8 +111,9 @@ public class DashbordActivity extends AppCompatActivity {
 		tab_layout.addTab( tab_layout.newTab( ).setText( "Configuracion" ) );
 		tab_layout.setTabGravity( TabLayout.GRAVITY_FILL );
 		
-		PagerAdapter pager_adapter = new PagerAdapter( getSupportFragmentManager( ),
-													   tab_layout.getTabCount( ) );
+		
+		PagerDashbordAdapter pager_adapter = new PagerDashbordAdapter( getSupportFragmentManager( ),
+																	   tab_layout.getTabCount( ) );
 		
 		view_pager.setAdapter( pager_adapter );
 		view_pager.addOnPageChangeListener(
@@ -113,7 +121,7 @@ public class DashbordActivity extends AppCompatActivity {
 		
 		tab_layout.addOnTabSelectedListener( new TabLayout.OnTabSelectedListener( ) {
 			@Override public void onTabSelected( TabLayout.Tab tab ) {
-				view_pager.setCurrentItem( tab.getPosition() );
+				view_pager.setCurrentItem( tab.getPosition( ) );
 			}
 			
 			@Override public void onTabUnselected( TabLayout.Tab tab ) {
@@ -124,7 +132,6 @@ public class DashbordActivity extends AppCompatActivity {
 			
 			}
 		} );
-		
 		
 	}
 	
@@ -137,15 +144,5 @@ public class DashbordActivity extends AppCompatActivity {
 		}
 		
 		return super.onOptionsItemSelected( item );
-	}
-	
-	private void changeFragment( Fragment fragment, MenuItem item ) {
-		//		getSupportFragmentManager( )
-		//				.beginTransaction( )
-		//				.replace( R.id.content_dashbord_frame, fragment )
-		//				.commit( );
-		//
-		//		item.setChecked( true );
-		//		getSupportActionBar().setTitle( item.getTitle() );
 	}
 }

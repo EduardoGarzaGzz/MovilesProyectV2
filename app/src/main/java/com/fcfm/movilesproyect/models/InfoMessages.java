@@ -34,9 +34,8 @@ public class InfoMessages {
 	public InfoMessages( ) {
 	}
 	
-	public InfoMessages( long id, User user_provoke,
-						 User user_addressee, String messages, String hash_action,
-						 Date create_at ) {
+	public InfoMessages( long id, User user_provoke, User user_addressee, String messages,
+	                     String hash_action, Date create_at ) {
 		this.id = id;
 		this.user_provoke = user_provoke;
 		this.user_addressee = user_addressee;
@@ -93,14 +92,10 @@ public class InfoMessages {
 		this.create_at = create_at;
 	}
 	
-	@Override public String toString( ) {
-		return "InfoMessages{" +
-			   "id=" + id +
-			   ", user_provoke=" + user_provoke.getNombres() +
-			   ", user_addressee=" + user_addressee.getNombres() +
-			   ", messages='" + messages + '\'' +
-			   ", hash_action='" + hash_action + '\'' +
-			   ", create_at=" + create_at +
-			   '}';
+	@Override
+	public String toString( ) {
+		return "InfoMessages{" + "id=" + id + ", user_provoke=" + user_provoke.getNombres( ) +
+		       ", user_addressee=" + user_addressee.getNombres( ) + ", messages='" + messages +
+		       '\'' + ", hash_action='" + hash_action + '\'' + ", create_at=" + create_at + '}';
 	}
 }

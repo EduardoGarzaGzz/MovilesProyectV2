@@ -8,11 +8,11 @@ import com.fcfm.movilesproyect.fragments.ConfigureFragment;
 import com.fcfm.movilesproyect.fragments.DashbordFragment;
 import com.fcfm.movilesproyect.fragments.InformativeMessagesFragment;
 
-public class PagerAdapter extends FragmentStatePagerAdapter {
+public class PagerDashbordAdapter extends FragmentStatePagerAdapter {
 	
 	private int number_tabs;
 	
-	public PagerAdapter( FragmentManager fm, int tabs ) {
+	public PagerDashbordAdapter( FragmentManager fm, int tabs ) {
 		super( fm );
 		
 		this.number_tabs = tabs;
