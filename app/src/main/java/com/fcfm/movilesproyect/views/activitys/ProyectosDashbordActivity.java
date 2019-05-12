@@ -1,11 +1,9 @@
-package com.fcfm.movilesproyect.activitys;
+package com.fcfm.movilesproyect.views.activitys;
 
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,11 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.adapters.PagerDashbordAdapter;
-import com.fcfm.movilesproyect.fragments.ListaCitasFragment;
-import com.fcfm.movilesproyect.models.User;
 
-public class CitasDashbordActivity extends AppCompatActivity {
+public class ProyectosDashbordActivity extends AppCompatActivity {
 	
 	private Context this_context;
 	
@@ -32,7 +27,7 @@ public class CitasDashbordActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-		setContentView( R.layout.activity_citas_dashbord );
+		setContentView( R.layout.activity_proyectos_dashbord );
 		
 		this.this_context = this;
 		
@@ -42,11 +37,7 @@ public class CitasDashbordActivity extends AppCompatActivity {
 		this.navigationView = ( NavigationView ) findViewById( R.id.nav_dashbord_view );
 		this.frame_layout = ( FrameLayout ) findViewById( R.id.frag_dashbord_citas_content );
 		
-		getSupportFragmentManager( ).beginTransaction( ).replace( R.id.frag_dashbord_citas_content,
-		                                                          new ListaCitasFragment( ) )
-		                            .commit( );
-		
-		this.navigationView.getMenu( ).getItem( 2 ).setChecked( true );
+		this.navigationView.getMenu( ).getItem( 1 ).setChecked( true );
 	}
 	
 	@Override
@@ -88,16 +79,15 @@ public class CitasDashbordActivity extends AppCompatActivity {
 								finish( );
 								break;
 							case R.id.menu_proyectos:
-								startActivity( new Intent( this_context,
-								                           ProyectosDashbordActivity.class ) );
-								finish( );
-								break;
-							case R.id.menu_citas:
-								Toast.makeText( this_context, "Ya estas en el citas",
+								Toast.makeText( this_context, "Ya estas en proyectos",
 								                Toast.LENGTH_LONG ).show( );
 								break;
+							case R.id.menu_citas:
+								startActivity(
+										new Intent( this_context, CitasDashbordActivity.class ) );
+								finish();
+								break;
 						}
-						
 						
 						return true;
 					}
@@ -106,7 +96,7 @@ public class CitasDashbordActivity extends AppCompatActivity {
 	
 	private void setToolbar( ) {
 		Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
-		toolbar.setTitle( "Citas" );
+		toolbar.setTitle( "Proyectos " );
 		setSupportActionBar( toolbar );
 		getSupportActionBar( ).setHomeAsUpIndicator( R.drawable.ic_buerger_menu );
 		getSupportActionBar( ).setDisplayHomeAsUpEnabled( true );

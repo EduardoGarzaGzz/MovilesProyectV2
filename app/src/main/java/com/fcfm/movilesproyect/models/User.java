@@ -1,11 +1,15 @@
 package com.fcfm.movilesproyect.models;
 
+import com.fcfm.movilesproyect.configurations.Utilidades;
+import com.fcfm.movilesproyect.interfaces.ILoginMVP;
+import com.fcfm.movilesproyect.interfaces.IMainMVP;
+import com.fcfm.movilesproyect.interfaces.IRegistrarmeMVP;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-public class User {
+public class User implements IMainMVP.Model, ILoginMVP.Model {
 	
 	private static User user_active;
 	
@@ -37,6 +41,14 @@ public class User {
 	@Expose
 	private String celular;
 	
+	@SerializedName( "img_perfil" )
+	@Expose
+	private String img_perfil;
+	
+	@SerializedName( "img_fondo" )
+	@Expose
+	private String img_fondo;
+	
 	@SerializedName( "create_at" )
 	@Expose
 	private Date create_at;
@@ -49,7 +61,7 @@ public class User {
 	}
 	
 	public User( long id, String username, String nombres, String apellidos, String correo,
-				 String password, String celular ) {
+	             String password, String celular ) {
 		this.id = id;
 		this.username = username;
 		this.nombres = nombres;
@@ -115,16 +127,45 @@ public class User {
 		this.celular = celular;
 	}
 	
-	@Override public String toString( ) {
-		return "User{" +
-			   "id=" + id +
-			   ", username='" + username + '\'' +
-			   ", nombres='" + nombres + '\'' +
-			   ", apellidos='" + apellidos + '\'' +
-			   ", correo='" + correo + '\'' +
-			   ", password='" + password + '\'' +
-			   ", celular='" + celular + '\'' +
-			   '}';
+	public String getImg_perfil( ) {
+		return img_perfil;
+	}
+	
+	public void setImg_perfil( String img_perfil ) {
+		this.img_perfil = img_perfil;
+	}
+	
+	public String getImg_fondo( ) {
+		return img_fondo;
+	}
+	
+	public void setImg_fondo( String img_fondo ) {
+		this.img_fondo = img_fondo;
+	}
+	
+	public Date getCreate_at( ) {
+		return create_at;
+	}
+	
+	public void setCreate_at( Date create_at ) {
+		this.create_at = create_at;
+	}
+	
+	public Date getUpdate_at( ) {
+		return update_at;
+	}
+	
+	public void setUpdate_at( Date update_at ) {
+		this.update_at = update_at;
+	}
+	
+	@Override
+	public String toString( ) {
+		return "User{" + "id=" + id + ", username='" + username + '\'' + ", nombres='" + nombres +
+		       '\'' + ", apellidos='" + apellidos + '\'' + ", correo='" + correo + '\'' +
+		       ", password='" + password + '\'' + ", celular='" + celular + '\'' +
+		       ", img_perfil='" + img_perfil + '\'' + ", img_fondo='" + img_fondo + '\'' +
+		       ", create_at=" + create_at + ", update_at=" + update_at + '}';
 	}
 	
 	public static User getUser_active( ) {
@@ -133,5 +174,11 @@ public class User {
 	
 	public static void setUser_active( User user_active ) {
 		User.user_active = user_active;
+	}
+	
+	@Override
+	public void setUserActivo( User user ) {
+		User.user_active = user;
+		Utilidades.printLog( "Usuario activo: " + User.user_active.toString( ) );
 	}
 }

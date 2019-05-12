@@ -1,4 +1,4 @@
-package com.fcfm.movilesproyect.fragments;
+package com.fcfm.movilesproyect.views.fragments;
 
 
 import android.Manifest;

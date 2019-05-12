@@ -1,21 +1,13 @@
-package com.fcfm.movilesproyect.fragments;
+package com.fcfm.movilesproyect.views.fragments;
 
 
-import android.content.Context;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.activitys.MainActivity;
-
-import java.util.Date;
 
 /**
  * A simple {@link Fragment} subclass.

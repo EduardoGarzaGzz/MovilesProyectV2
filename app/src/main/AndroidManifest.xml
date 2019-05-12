@@ -11,7 +11,10 @@
     <uses-permission android:name = "android.permission.ACCESS_NETWORK_STATE" /> <!-- Obtener ubicacion del usuario -->
 	<uses-permission android:name = "android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name = "android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name = "android.permission.READ_EXTERNAL_STORAGE" />
 
+	<uses-permission android:name="android.permission.CAMERA" />
+	
     <application
 		android:allowBackup = "true"
 		android:icon = "@mipmap/ic_launcher"
@@ -19,22 +22,24 @@
 		android:roundIcon = "@mipmap/ic_launcher_round"
 		android:supportsRtl = "true"
 		android:theme = "@style/AppTheme">
-        <activity android:name = ".activitys.ProyectosDashbordActivity">
+        <activity android:name = ".views.activitys.EditUserActivity">
+        </activity>
+        <activity android:name = ".views.activitys.ProyectosDashbordActivity">
         </activity>
 
         <meta-data
 			android:name = "com.google.android.geo.API_KEY"
 			android:value = "@string/google_maps_key" />
 
-        <activity android:name = ".activitys.CitasDashbordActivity">
+        <activity android:name = ".views.activitys.CitasDashbordActivity">
         </activity>
-        <activity android:name = ".activitys.DashbordActivity">
+        <activity android:name = ".views.activitys.DashbordActivity">
         </activity>
-        <activity android:name = ".activitys.RegistrarmeActivity">
+        <activity android:name = ".views.activitys.RegistrarmeActivity">
         </activity>
-        <activity android:name = ".activitys.LoginActivity">
+        <activity android:name = ".views.activitys.LoginActivity">
         </activity>
-        <activity android:name = ".activitys.MainActivity">
+        <activity android:name = ".views.activitys.MainActivity">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
 

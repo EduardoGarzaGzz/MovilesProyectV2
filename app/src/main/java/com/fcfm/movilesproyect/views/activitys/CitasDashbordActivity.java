@@ -1,4 +1,4 @@
-package com.fcfm.movilesproyect.activitys;
+package com.fcfm.movilesproyect.views.activitys;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,8 +14,9 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
+import com.fcfm.movilesproyect.views.fragments.ListaCitasFragment;
 
-public class ProyectosDashbordActivity extends AppCompatActivity {
+public class CitasDashbordActivity extends AppCompatActivity {
 	
 	private Context this_context;
 	
@@ -27,7 +28,7 @@ public class ProyectosDashbordActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate( Bundle savedInstanceState ) {
 		super.onCreate( savedInstanceState );
-		setContentView( R.layout.activity_proyectos_dashbord );
+		setContentView( R.layout.activity_citas_dashbord );
 		
 		this.this_context = this;
 		
@@ -37,7 +38,11 @@ public class ProyectosDashbordActivity extends AppCompatActivity {
 		this.navigationView = ( NavigationView ) findViewById( R.id.nav_dashbord_view );
 		this.frame_layout = ( FrameLayout ) findViewById( R.id.frag_dashbord_citas_content );
 		
-		this.navigationView.getMenu( ).getItem( 1 ).setChecked( true );
+		getSupportFragmentManager( ).beginTransaction( ).replace( R.id.frag_dashbord_citas_content,
+		                                                          new ListaCitasFragment( ) )
+		                            .commit( );
+		
+		this.navigationView.getMenu( ).getItem( 2 ).setChecked( true );
 	}
 	
 	@Override
@@ -79,15 +84,16 @@ public class ProyectosDashbordActivity extends AppCompatActivity {
 								finish( );
 								break;
 							case R.id.menu_proyectos:
-								Toast.makeText( this_context, "Ya estas en proyectos",
-								                Toast.LENGTH_LONG ).show( );
+								startActivity( new Intent( this_context,
+								                           ProyectosDashbordActivity.class ) );
+								finish( );
 								break;
 							case R.id.menu_citas:
-								startActivity(
-										new Intent( this_context, CitasDashbordActivity.class ) );
-								finish();
+								Toast.makeText( this_context, "Ya estas en el citas",
+								                Toast.LENGTH_LONG ).show( );
 								break;
 						}
+						
 						
 						return true;
 					}
@@ -96,7 +102,7 @@ public class ProyectosDashbordActivity extends AppCompatActivity {
 	
 	private void setToolbar( ) {
 		Toolbar toolbar = ( Toolbar ) findViewById( R.id.toolbar );
-		toolbar.setTitle( "Proyectos " );
+		toolbar.setTitle( "Citas" );
 		setSupportActionBar( toolbar );
 		getSupportActionBar( ).setHomeAsUpIndicator( R.drawable.ic_buerger_menu );
 		getSupportActionBar( ).setDisplayHomeAsUpEnabled( true );
