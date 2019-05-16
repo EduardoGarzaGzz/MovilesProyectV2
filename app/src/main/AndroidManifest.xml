@@ -21,24 +21,24 @@
 		android:roundIcon = "@mipmap/ic_launcher_round"
 		android:supportsRtl = "true"
 		android:theme = "@style/AppTheme">
-        <activity android:name = ".views.activitys.ProjectsDashboardActivity">
+        <activity android:name = ".ui.activitys.ProjectsDashboardActivity">
         </activity>
-        <activity android:name = ".views.activitys.EditUserActivity">
+        <activity android:name = ".ui.activitys.EditUserActivity">
         </activity>
 
         <meta-data
 			android:name = "com.google.android.geo.API_KEY"
 			android:value = "@string/google_maps_key" />
 
-        <activity android:name = ".views.activitys.CitasDashbordActivity">
+        <activity android:name = ".ui.activitys.CitasDashbordActivity">
         </activity>
-        <activity android:name = ".views.activitys.DashbordActivity">
+        <activity android:name = ".ui.activitys.DashbordActivity">
         </activity>
-        <activity android:name = ".views.activitys.RegistrarmeActivity">
+        <activity android:name = ".ui.activitys.RegistrarmeActivity">
         </activity>
-        <activity android:name = ".views.activitys.LoginActivity">
+        <activity android:name = ".ui.activitys.LoginActivity">
         </activity>
-        <activity android:name = ".views.activitys.MainActivity">
+        <activity android:name = ".ui.activitys.MainActivity">
             <intent-filter>
                 <action android:name = "android.intent.action.MAIN" />
 

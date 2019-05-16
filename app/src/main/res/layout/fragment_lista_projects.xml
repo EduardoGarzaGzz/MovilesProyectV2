@@ -4,11 +4,22 @@
 	xmlns:tools = "http://schemas.android.com/tools"
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent"
-	tools:context = ".views.fragments.ListaProjectsFragment"><android.support.constraint.ConstraintLayout
+	tools:context = ".ui.fragments.ListaProjectsFragment"><android.support.constraint.ConstraintLayout
 	android:layout_width = "match_parent"
 	android:layout_height = "match_parent">
 
-<TextView
+<android.support.v7.widget.RecyclerView
+	android:id = "@+id/rv_frac_lista_projects_list"
+	android:layout_width = "0dp"
+	android:layout_height = "0dp"
+	android:layout_marginStart = "8dp"
+	android:layout_marginTop = "8dp"
+	android:layout_marginEnd = "8dp"
+	android:layout_marginBottom = "8dp"
+	app:layout_constraintBottom_toBottomOf = "parent"
+	app:layout_constraintEnd_toEndOf = "parent"
+	app:layout_constraintStart_toStartOf = "parent"
+	app:layout_constraintTop_toBottomOf = "@+id/ed_frac_lista_projects_serch" /><TextView
 	android:id = "@+id/tv_frac_lista_projects_no_hay"
 	android:layout_width = "wrap_content"
 	android:layout_height = "wrap_content"
@@ -41,15 +52,4 @@
 	android:inputType = "textPersonName"
 	app:layout_constraintEnd_toStartOf = "@+id/btn_frac_lista_projects_add"
 	app:layout_constraintStart_toStartOf = "parent"
-	app:layout_constraintTop_toTopOf = "parent" /><android.support.v7.widget.RecyclerView
-	android:id = "@+id/rv_frac_lista_projects_list"
-	android:layout_width = "395dp"
-	android:layout_height = "662dp"
-	android:layout_marginStart = "8dp"
-	android:layout_marginTop = "8dp"
-	android:layout_marginEnd = "8dp"
-	android:layout_marginBottom = "8dp"
-	app:layout_constraintBottom_toBottomOf = "parent"
-	app:layout_constraintEnd_toEndOf = "parent"
-	app:layout_constraintStart_toStartOf = "parent"
-	app:layout_constraintTop_toBottomOf = "@+id/ed_frac_lista_projects_serch" /></android.support.constraint.ConstraintLayout></FrameLayout>
+	app:layout_constraintTop_toTopOf = "parent" /></android.support.constraint.ConstraintLayout></FrameLayout>

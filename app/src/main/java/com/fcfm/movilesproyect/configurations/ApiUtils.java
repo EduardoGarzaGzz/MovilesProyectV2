@@ -1,7 +1,8 @@
 package com.fcfm.movilesproyect.configurations;
 
-import com.fcfm.movilesproyect.apis.InfoMsgAPIService;
-import com.fcfm.movilesproyect.apis.UserAPIService;
+import com.fcfm.movilesproyect.db.apis.InfoMsgAPIService;
+import com.fcfm.movilesproyect.db.apis.ProjectAPIService;
+import com.fcfm.movilesproyect.db.apis.UserAPIService;
 
 public class ApiUtils {
 	
@@ -16,5 +17,9 @@ public class ApiUtils {
 	
 	public static InfoMsgAPIService getInfoMsgApiService( ) {
 		return RetrofitClient.getClient( BASE_URL ).create( InfoMsgAPIService.class );
+	}
+	
+	public static ProjectAPIService getProjectService( ) {
+		return RetrofitClient.getClient( BASE_URL ).create( ProjectAPIService.class );
 	}
 }

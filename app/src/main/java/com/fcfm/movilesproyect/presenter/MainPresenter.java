@@ -3,11 +3,11 @@ package com.fcfm.movilesproyect.presenter;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.fcfm.movilesproyect.apis.UserAPIService;
+import com.fcfm.movilesproyect.db.apis.UserAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
 import com.fcfm.movilesproyect.configurations.Utilidades;
-import com.fcfm.movilesproyect.interfaces.IMainMVP;
-import com.fcfm.movilesproyect.models.User;
+import com.fcfm.movilesproyect.presenter.interfaces.IMainMVP;
+import com.fcfm.movilesproyect.db.models.User;
 
 import java.util.Date;
 

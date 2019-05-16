@@ -22,10 +22,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.models.User;
-import com.fcfm.movilesproyect.views.activitys.CitasDashbordActivity;
-import com.fcfm.movilesproyect.views.activitys.DashbordActivity;
-import com.fcfm.movilesproyect.views.activitys.ProjectsDashboardActivity;
+import com.fcfm.movilesproyect.db.models.User;
+import com.fcfm.movilesproyect.ui.activitys.CitasDashbordActivity;
+import com.fcfm.movilesproyect.ui.activitys.DashbordActivity;
+import com.fcfm.movilesproyect.ui.activitys.ProjectsDashboardActivity;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;

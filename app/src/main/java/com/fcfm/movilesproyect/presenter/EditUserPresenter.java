@@ -2,11 +2,11 @@ package com.fcfm.movilesproyect.presenter;
 
 import android.view.View;
 
-import com.fcfm.movilesproyect.apis.UserAPIService;
+import com.fcfm.movilesproyect.db.apis.UserAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
 import com.fcfm.movilesproyect.configurations.Utilidades;
-import com.fcfm.movilesproyect.interfaces.IEditUserMVP;
-import com.fcfm.movilesproyect.models.User;
+import com.fcfm.movilesproyect.presenter.interfaces.IEditUserMVP;
+import com.fcfm.movilesproyect.db.models.User;
 
 import java.io.File;
 

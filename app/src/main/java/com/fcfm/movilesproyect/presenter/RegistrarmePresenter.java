@@ -1,15 +1,10 @@
 package com.fcfm.movilesproyect.presenter;
 
-import android.content.Intent;
-import android.util.Log;
-import android.widget.Toast;
-
-import com.fcfm.movilesproyect.apis.UserAPIService;
+import com.fcfm.movilesproyect.db.apis.UserAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
 import com.fcfm.movilesproyect.configurations.Utilidades;
-import com.fcfm.movilesproyect.interfaces.IRegistrarmeMVP;
-import com.fcfm.movilesproyect.models.User;
-import com.fcfm.movilesproyect.views.activitys.LoginActivity;
+import com.fcfm.movilesproyect.presenter.interfaces.IRegistrarmeMVP;
+import com.fcfm.movilesproyect.db.models.User;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

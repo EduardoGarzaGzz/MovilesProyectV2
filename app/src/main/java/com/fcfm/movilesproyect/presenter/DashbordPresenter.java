@@ -9,16 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.adapters.InfoMsgAdapter;
-import com.fcfm.movilesproyect.apis.InfoMsgAPIService;
+import com.fcfm.movilesproyect.ui.adapters.InfoMsgAdapter;
+import com.fcfm.movilesproyect.db.apis.InfoMsgAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
 import com.fcfm.movilesproyect.configurations.Utilidades;
-import com.fcfm.movilesproyect.interfaces.IDashbordMVP;
-import com.fcfm.movilesproyect.models.InfoMessages;
-import com.fcfm.movilesproyect.models.User;
-import com.fcfm.movilesproyect.views.activitys.EditUserActivity;
-import com.fcfm.movilesproyect.views.activitys.MainActivity;
-import com.fcfm.movilesproyect.views.activitys.ProjectsDashboardActivity;
+import com.fcfm.movilesproyect.presenter.interfaces.IDashbordMVP;
+import com.fcfm.movilesproyect.db.models.InfoMessages;
+import com.fcfm.movilesproyect.db.models.User;
+import com.fcfm.movilesproyect.ui.activitys.EditUserActivity;
+import com.fcfm.movilesproyect.ui.activitys.MainActivity;
+import com.fcfm.movilesproyect.ui.activitys.ProjectsDashboardActivity;
 
 import java.util.Arrays;
 
