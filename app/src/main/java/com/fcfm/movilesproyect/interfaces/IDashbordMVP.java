@@ -32,7 +32,15 @@ public interface IDashbordMVP {
 		}
 		
 		interface Configure {
+			
 			void setPresenter( IDashbordMVP.Presenter presenter );
+			
+		}
+		
+		interface Dashbord {
+			
+			void setPresenter( IDashbordMVP.Presenter presenter );
+			
 		}
 	}
 	
@@ -57,7 +65,13 @@ public interface IDashbordMVP {
 		
 		android.view.View.OnClickListener clickCloseSession( );
 		
+		android.view.View.OnClickListener clickQuickProjects( );
 		
+		android.view.View.OnClickListener clickQuickTask( );
+		
+		android.view.View.OnClickListener clickQuickFriends( );
+		
+		android.view.View.OnClickListener clickQuickCites( );
 	}
 	
 	interface Model {

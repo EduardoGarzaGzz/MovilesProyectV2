@@ -29,6 +29,7 @@ public class PagerDashbordAdapter extends FragmentStatePagerAdapter {
 		switch ( i ) {
 			case 0:
 				fragment = new DashbordFragment( );
+				( ( DashbordFragment ) fragment ).setPresenter( this.presenter );
 				break;
 			case 1:
 				fragment = new InformativeMessagesFragment( );
@@ -39,17 +40,7 @@ public class PagerDashbordAdapter extends FragmentStatePagerAdapter {
 				( ( ConfigureFragment ) fragment ).setPresenter( this.presenter );
 				break;
 		}
-
-//		switch ( i ) {
-//			case 0:
-//				return new DashbordFragment( );
-//			case 1:
-//
-//
-//				return new InformativeMessagesFragment( );
-//			case 2:
-//				return new ConfigureFragment( );
-//		}
+		
 		return fragment;
 	}
 	

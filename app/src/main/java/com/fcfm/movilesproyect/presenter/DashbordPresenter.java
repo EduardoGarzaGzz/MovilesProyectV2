@@ -18,6 +18,7 @@ import com.fcfm.movilesproyect.models.InfoMessages;
 import com.fcfm.movilesproyect.models.User;
 import com.fcfm.movilesproyect.views.activitys.EditUserActivity;
 import com.fcfm.movilesproyect.views.activitys.MainActivity;
+import com.fcfm.movilesproyect.views.activitys.ProjectsDashboardActivity;
 
 import java.util.Arrays;
 
@@ -70,8 +71,8 @@ public class DashbordPresenter implements IDashbordMVP.Presenter {
 		return new View.OnClickListener( ) {
 			@Override
 			public void onClick( View v ) {
-				view.getActivity().startActivity( new Intent( view.getContext(),
-				                                              EditUserActivity.class ) );
+				view.getActivity( )
+				    .startActivity( new Intent( view.getContext( ), EditUserActivity.class ) );
 			}
 		};
 	}
@@ -95,7 +96,49 @@ public class DashbordPresenter implements IDashbordMVP.Presenter {
 				
 				view.getActivity( )
 				    .startActivity( new Intent( view.getContext( ), MainActivity.class ) );
-				view.getActivity().finish();
+				view.getActivity( ).finish( );
+			}
+		};
+	}
+	
+	@Override
+	public View.OnClickListener clickQuickProjects( ) {
+		return new View.OnClickListener( ) {
+			@Override
+			public void onClick( View v ) {
+				view.getActivity( ).startActivity(
+						new Intent( view.getActivity( ), ProjectsDashboardActivity.class ) );
+				view.getActivity( ).finish( );
+			}
+		};
+	}
+	
+	@Override
+	public View.OnClickListener clickQuickTask( ) {
+		return new View.OnClickListener( ) {
+			@Override
+			public void onClick( View v ) {
+				// TODO implemetar este evento
+			}
+		};
+	}
+	
+	@Override
+	public View.OnClickListener clickQuickFriends( ) {
+		return new View.OnClickListener( ) {
+			@Override
+			public void onClick( View v ) {
+				// TODO implemetar este evento
+			}
+		};
+	}
+	
+	@Override
+	public View.OnClickListener clickQuickCites( ) {
+		return new View.OnClickListener( ) {
+			@Override
+			public void onClick( View v ) {
+				// TODO implemetar este evento
 			}
 		};
 	}

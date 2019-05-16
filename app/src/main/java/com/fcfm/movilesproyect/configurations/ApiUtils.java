@@ -8,7 +8,7 @@ public class ApiUtils {
 	private ApiUtils( ) {}
 	
 //	private static final String BASE_URL = "https://moviles-api.herokuapp.com";
-	private static final String BASE_URL = "http://192.168.15.25:8080";
+	private static final String BASE_URL = "http://192.168.15.16:8080";
 	
 	public static UserAPIService getUserAPIService( ) {
 		return RetrofitClient.getClient( BASE_URL ).create( UserAPIService.class );

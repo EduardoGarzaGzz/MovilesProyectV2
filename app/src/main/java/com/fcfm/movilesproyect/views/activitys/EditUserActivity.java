@@ -3,7 +3,7 @@ package com.fcfm.movilesproyect.views.activitys;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -22,13 +22,10 @@ import com.fcfm.movilesproyect.models.User;
 import com.fcfm.movilesproyect.presenter.EditUserPresenter;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
+
 import java.io.File;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.OutputStream;
-import java.nio.file.Files;
-import java.util.UUID;
 
 public class EditUserActivity extends AppCompatActivity implements IEditUserMVP.View {
 	
@@ -85,6 +82,7 @@ public class EditUserActivity extends AppCompatActivity implements IEditUserMVP.
 		this.btn_cancelar = ( Button ) findViewById( R.id.btn_edit_user_cancelar );
 		
 		this.presenter = new EditUserPresenter( this );
+		this.presenter.init( );
 		
 		Utilidades.checkPermisos( this );
 	}
@@ -92,8 +90,6 @@ public class EditUserActivity extends AppCompatActivity implements IEditUserMVP.
 	@Override
 	protected void onStart( ) {
 		super.onStart( );
-		
-		this.presenter.init();
 		
 		this.btn_camara_perfil.setOnClickListener( this.presenter.clickCamaraPerfil( ) );
 		this.btn_camara_fondo.setOnClickListener( this.presenter.clickCamaraFondo( ) );
@@ -159,15 +155,44 @@ public class EditUserActivity extends AppCompatActivity implements IEditUserMVP.
 	@Override
 	public void setData( User user ) {
 		
+		Utilidades.printLog( "Actualizado data del usuario en el activity" );
+		
 		this.nombres.setText( user.getNombres( ) );
 		this.apellidos.setText( user.getApellidos( ) );
 		this.username.setText( user.getUsername( ) );
 		this.correo.setText( user.getCorreo( ) );
 		this.celular.setText( user.getCelular( ) );
 		
-		Picasso.get( ).load( user.getImg_perfil( ) ).into( this.img_perfil );
-		Picasso.get( ).load( user.getImg_fondo( ) ).into( this.img_fondo );
+		if ( user.getImg_perfil( ) != null && ! user.getImg_perfil( ).equals( "" ) )
+			Picasso.get( ).load( user.getImg_perfil_uri( ) ).into( this.img_perfil );
 		
+		if ( user.getImg_fondo( ) != null && ! user.getImg_fondo( ).equals( "" ) )
+			Picasso.get( ).load( user.getImg_fondo_uri( ) ).into( this.img_fondo );
+		
+		
+	}
+	
+	@Override
+	public User getData( ) {
+		User user = new User( );
+		
+		user.setId( User.getUser_active( ).getId( ) );
+		user.setUsername( this.username.getText( ).toString( ) );
+		user.setNombres( this.nombres.getText( ).toString( ) );
+		user.setApellidos( this.apellidos.getText( ).toString( ) );
+		user.setCorreo( this.correo.getText( ).toString( ) );
+		
+		if ( this.change_password.getText( ).toString( ).trim( ).length( ) >= 3 &&
+		     this.change_password.getText( ).toString( ).trim( )
+		                         .equals( this.password_verfi.getText( ).toString( ).trim( ) ) )
+			user.setPassword( this.change_password.getText( ).toString( ).trim( ) );
+		else user.setPassword( User.getUser_active( ).getPassword( ) );
+		
+		user.setCelular( this.celular.getText( ).toString( ) );
+		user.setImg_perfil( User.getUser_active( ).getImg_perfil( ) );
+		user.setImg_fondo( User.getUser_active( ).getImg_fondo( ) );
+		
+		return user;
 	}
 	
 	@Override

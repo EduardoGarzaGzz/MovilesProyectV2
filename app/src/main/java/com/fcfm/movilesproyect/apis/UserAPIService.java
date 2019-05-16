@@ -26,6 +26,9 @@ public interface UserAPIService {
 	@POST( "/api/v1/users" )
 	Call< User > registrarUser( @Body User user );
 	
+	@POST( "/api/v1/user/update" )
+	Call< User > actualizarUser( @Body User user );
+	
 	@Multipart
 	@POST( "/api/v1/{id}/save_img_perfil" )
 	Call< User > saveImgPerfil( @Path( "id" ) long id, @Part MultipartBody.Part file );

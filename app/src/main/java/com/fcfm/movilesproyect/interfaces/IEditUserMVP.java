@@ -13,6 +13,8 @@ public interface IEditUserMVP {
 		
 		void setData( User user );
 		
+		User getData( );
+		
 		Context getContext( );
 		
 		AppCompatActivity getActivity( );
@@ -24,7 +26,7 @@ public interface IEditUserMVP {
 	
 	interface Presenter {
 		
-		void init();
+		void init( );
 		
 		android.view.View.OnClickListener clickCamaraPerfil( );
 		

@@ -17,7 +17,7 @@
 			layout = "@layout/includ_toolbar" />
 		
 		<FrameLayout
-			android:id="@+id/frag_dashbord_proyecto_content"
+			android:id = "@+id/frag_dashbord_project_content"
 			android:layout_width = "match_parent"
 			android:layout_height = "match_parent">
 			

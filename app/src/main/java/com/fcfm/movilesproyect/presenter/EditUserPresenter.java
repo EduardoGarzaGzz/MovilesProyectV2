@@ -29,7 +29,31 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 	
 	@Override
 	public void init( ) {
-		this.view.setData( User.getUser_active() );
+		
+		UserAPIService api = ApiUtils.getUserAPIService( );
+		api.getUser( String.valueOf( User.getUser_active( ).getId( ) ) )
+		   .enqueue( new Callback< User >( ) {
+			   @Override
+			   public void onResponse( Call< User > call, Response< User > response ) {
+				
+				   Utilidades.printResponseCode( response );
+				
+				   if ( response.isSuccessful( ) ) {
+					   Utilidades.printResponseBody( response );
+					
+					   User.setUser_active( response.body( ) );
+					   view.setData( User.getUser_active( ) );
+				   }
+				
+			   }
+			
+			   @Override
+			   public void onFailure( Call< User > call, Throwable t ) {
+				   Utilidades.failPeticionApi( t );
+			   }
+		   } );
+		
+		this.view.setData( User.getUser_active( ) );
 	}
 	
 	@Override
@@ -75,6 +99,7 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 	}
 	
 	private MultipartBody.Part getBody( File file ) {
+		
 		try {
 			final RequestBody request = RequestBody
 					                            .create( MediaType.parse( "multipart/form-data" ),
@@ -155,7 +180,31 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 		return new View.OnClickListener( ) {
 			@Override
 			public void onClick( View v ) {
-			
+				User user = view.getData( );
+				
+				UserAPIService service = ApiUtils.getUserAPIService( );
+				service.actualizarUser( user ).enqueue( new Callback< User >( ) {
+					@Override
+					public void onResponse( Call< User > call, Response< User > response ) {
+						
+						Utilidades.printResponseCode( response );
+						
+						if ( response.isSuccessful( ) ) {
+							Utilidades.printResponseBody( response );
+							
+							User.setUser_active( response.body() );
+							
+							Utilidades.printToast( view.getContext( ),
+							                       "Se a actualizado correctamente" );
+							view.getActivity( ).finish( );
+						}
+					}
+					
+					@Override
+					public void onFailure( Call< User > call, Throwable t ) {
+						Utilidades.failPeticionApi( t );
+					}
+				} );
 			}
 		};
 	}

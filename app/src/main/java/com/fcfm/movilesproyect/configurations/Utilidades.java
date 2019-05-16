@@ -1,7 +1,6 @@
 package com.fcfm.movilesproyect.configurations;
 
 import android.Manifest;
-import android.app.ActionBar;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,24 +10,28 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
 import com.fcfm.movilesproyect.models.User;
 import com.fcfm.movilesproyect.views.activitys.CitasDashbordActivity;
 import com.fcfm.movilesproyect.views.activitys.DashbordActivity;
-import com.fcfm.movilesproyect.views.activitys.ProyectosDashbordActivity;
+import com.fcfm.movilesproyect.views.activitys.ProjectsDashboardActivity;
+import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
-import java.util.Objects;
 import java.util.UUID;
 
 import retrofit2.Response;
@@ -71,12 +74,30 @@ public class Utilidades {
 	}
 	
 	public static void setRecuerdame( Context ctx, String txt ) {
-		SharedPreferences        prefs      = ctx.getSharedPreferences( "recuerdame",
-		                                                                Context.MODE_PRIVATE );
+		SharedPreferences prefs = ctx.getSharedPreferences( "recuerdame", Context.MODE_PRIVATE );
 		SharedPreferences.Editor edit_prefs = prefs.edit( );
 		
 		edit_prefs.putString( "cuenta", txt );
 		edit_prefs.apply( );
+	}
+	
+	public static Fragment changeFragment( FragmentManager fg, int id, Fragment f ) {
+		fg.beginTransaction( ).replace( id, f ).commit( );
+		return f;
+	}
+	
+	public static void setUserInfo( View view ) {
+		ImageView perfil = view.findViewById( R.id.iv_header_navigation_img_user );
+		ImageView fondo  = view.findViewById( R.id.iv_header_navigation_img_background );
+		TextView  nombre = view.findViewById( R.id.tv_header_navigation_name_user );
+		
+		if ( User.getUser_active( ).getImg_perfil( ) != null )
+			Picasso.get( ).load( User.getUser_active( ).getImg_perfil_uri( ) ).into( perfil );
+		
+		if ( User.getUser_active( ).getImg_fondo( ) != null )
+			Picasso.get( ).load( User.getUser_active( ).getImg_fondo_uri( ) ).into( fondo );
+		
+		nombre.setText( User.getUser_active( ).getNombres( ) );
 	}
 	
 	public static void setToolbar( AppCompatActivity view, String title ) {
@@ -101,7 +122,7 @@ public class Utilidades {
 				view.finish( );
 				break;
 			case R.id.menu_proyectos:
-				view.startActivity( new Intent( view, ProyectosDashbordActivity.class ) );
+				view.startActivity( new Intent( view, ProjectsDashboardActivity.class ) );
 				view.finish( );
 			case R.id.menu_citas:
 				view.startActivity( new Intent( view, CitasDashbordActivity.class ) );
@@ -141,15 +162,45 @@ public class Utilidades {
 		activity.startActivityForResult( intent, code );
 	}
 	
-	public static File createFileDrawable( AppCompatActivity activity, Drawable drawable ) {
+	public static File createFileBitmap( AppCompatActivity activity, Bitmap bitmap ) {
 		try {
 			OutputStream stream = new ByteArrayOutputStream( );
-			Bitmap       bitmap = ( ( BitmapDrawable ) drawable ).getBitmap( );
 			
 			if ( bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream ) ) {
 				File file = new File( activity.getCacheDir( ),
 				                      UUID.randomUUID( ).toString( ) + ".png" );
 				
+				if ( file.createNewFile( ) ) {
+					FileOutputStream fos = new FileOutputStream( file );
+					fos.write( ( ( ByteArrayOutputStream ) stream ).toByteArray( ) );
+					fos.flush( );
+					fos.close( );
+					
+					return file;
+				}
+			}
+		}catch ( Exception e ) {
+			e.printStackTrace( );
+		}
+		return null;
+	}
+	
+	public static File createFileDrawable( AppCompatActivity activity, Drawable drawable ) {
+		try {
+			OutputStream stream = new ByteArrayOutputStream( );
+			Bitmap       bitmap = ( ( BitmapDrawable ) drawable ).getBitmap( );
+			
+			if ( bitmap.getByteCount( ) >= 10485760 ) {
+				Utilidades.printToast( activity.getApplicationContext( ),
+				                       "La imagen es demaciado grande elija otra." );
+				return null;
+			}
+			
+			Utilidades.printLog( String.valueOf( bitmap.getByteCount( ) ) );
+			
+			if ( bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream ) ) {
+				File file = new File( activity.getCacheDir( ),
+				                      UUID.randomUUID( ).toString( ) + ".png" );
 				
 				if ( file.createNewFile( ) ) {
 					FileOutputStream fos = new FileOutputStream( file );

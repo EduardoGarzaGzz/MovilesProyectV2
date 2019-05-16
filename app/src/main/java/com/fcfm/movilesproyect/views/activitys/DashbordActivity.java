@@ -39,6 +39,8 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 		
 		this.presenter = new DashbordPresenter( this );
 		this.presenter.init( );
+		
+		Utilidades.setUserInfo( this.navigationView.getHeaderView( 0 ) );
 	}
 	
 	@Override

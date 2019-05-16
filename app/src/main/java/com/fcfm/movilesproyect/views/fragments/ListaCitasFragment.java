@@ -18,9 +18,7 @@ public class ListaCitasFragment extends Fragment {
 	
 	private Button btn_agregar;
 	
-	public ListaCitasFragment( ) {
-		// Required empty public constructor
-	}
+	public ListaCitasFragment( ) { }
 	
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,

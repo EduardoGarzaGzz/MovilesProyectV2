@@ -42,6 +42,8 @@ public class CitasDashbordActivity extends AppCompatActivity {
 		                                                          new ListaCitasFragment( ) )
 		                            .commit( );
 		
+		
+		
 		this.navigationView.getMenu( ).getItem( 2 ).setChecked( true );
 	}
 	
@@ -84,8 +86,7 @@ public class CitasDashbordActivity extends AppCompatActivity {
 								finish( );
 								break;
 							case R.id.menu_proyectos:
-								startActivity( new Intent( this_context,
-								                           ProyectosDashbordActivity.class ) );
+
 								finish( );
 								break;
 							case R.id.menu_citas:

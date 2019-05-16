@@ -49,6 +49,14 @@ public class User implements IMainMVP.Model, ILoginMVP.Model {
 	@Expose
 	private String img_fondo;
 	
+	@SerializedName( "imgPerfilUri" )
+	@Expose
+	private String img_perfil_uri;
+	
+	@SerializedName( "imgFondoUri" )
+	@Expose
+	private String img_fondo_uri;
+	
 	@SerializedName( "create_at" )
 	@Expose
 	private Date create_at;
@@ -143,6 +151,22 @@ public class User implements IMainMVP.Model, ILoginMVP.Model {
 		this.img_fondo = img_fondo;
 	}
 	
+	public String getImg_perfil_uri( ) {
+		return img_perfil_uri;
+	}
+	
+	public void setImg_perfil_uri( String img_perfil_uri ) {
+		this.img_perfil_uri = img_perfil_uri;
+	}
+	
+	public String getImg_fondo_uri( ) {
+		return img_fondo_uri;
+	}
+	
+	public void setImg_fondo_uri( String img_fondo_uri ) {
+		this.img_fondo_uri = img_fondo_uri;
+	}
+	
 	public Date getCreate_at( ) {
 		return create_at;
 	}
@@ -165,7 +189,8 @@ public class User implements IMainMVP.Model, ILoginMVP.Model {
 		       '\'' + ", apellidos='" + apellidos + '\'' + ", correo='" + correo + '\'' +
 		       ", password='" + password + '\'' + ", celular='" + celular + '\'' +
 		       ", img_perfil='" + img_perfil + '\'' + ", img_fondo='" + img_fondo + '\'' +
-		       ", create_at=" + create_at + ", update_at=" + update_at + '}';
+		       ", img_perfil_uri='" + img_perfil_uri + '\'' + ", img_fondo_uri='" + img_fondo_uri +
+		       '\'' + ", create_at=" + create_at + ", update_at=" + update_at + '}';
 	}
 	
 	public static User getUser_active( ) {
