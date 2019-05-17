@@ -4,10 +4,7 @@ import android.app.Application;
 import android.arch.lifecycle.LiveData;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.ListFragment;
 
-import com.fcfm.movilesproyect.R;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
 import com.fcfm.movilesproyect.configurations.ConfigRoomDatabase;
 import com.fcfm.movilesproyect.configurations.Utilidades;
@@ -15,7 +12,6 @@ import com.fcfm.movilesproyect.db.apis.ProjectAPIService;
 import com.fcfm.movilesproyect.db.dao.ProjectDao;
 import com.fcfm.movilesproyect.db.models.Project;
 import com.fcfm.movilesproyect.db.models.User;
-import com.fcfm.movilesproyect.ui.fragments.ListaProjectsFragment;
 
 import java.util.List;
 

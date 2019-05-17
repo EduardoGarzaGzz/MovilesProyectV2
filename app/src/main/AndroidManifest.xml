@@ -21,6 +21,8 @@
 		android:roundIcon = "@mipmap/ic_launcher_round"
 		android:supportsRtl = "true"
 		android:theme = "@style/AppTheme">
+        <activity android:name = ".ui.activitys.TaskDashboardActivity">
+        </activity>
         <activity android:name = ".ui.activitys.ProjectsDashboardActivity">
         </activity>
         <activity android:name = ".ui.activitys.EditUserActivity">

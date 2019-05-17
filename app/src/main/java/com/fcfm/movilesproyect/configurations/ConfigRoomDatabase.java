@@ -6,12 +6,16 @@ import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
 import com.fcfm.movilesproyect.db.dao.ProjectDao;
+import com.fcfm.movilesproyect.db.dao.TaskDao;
 import com.fcfm.movilesproyect.db.models.Project;
+import com.fcfm.movilesproyect.db.models.TaskEntity;
 
-@Database( entities = { Project.class }, version = 1 )
+@Database( entities = { Project.class, TaskEntity.class }, version = 2 )
 public abstract class ConfigRoomDatabase extends RoomDatabase {
 	
 	public abstract ProjectDao projectDao( );
+	
+	public abstract TaskDao taskDao( );
 	
 	private static volatile ConfigRoomDatabase INSTANCE;
 	
