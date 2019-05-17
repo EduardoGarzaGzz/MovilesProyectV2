@@ -41,6 +41,8 @@ public interface IProjectDashboard {
 			void setPresenter( IProjectDashboard.Presenter presenter );
 			
 			Project getProject( );
+			
+			void setProject( Project project );
 		}
 		
 	}

@@ -16,6 +16,9 @@ public interface ProjectDao {
 	@Query( "SELECT * FROM project ORDER BY title ASC" )
 	LiveData< List< Project > > getAll( );
 	
+	@Query( "SELECT * FROM project WHERE id = :idProject" )
+	LiveData< Project > getProjectById( int idProject );
+	
 	@Insert
 	void insert( Project project );
 	

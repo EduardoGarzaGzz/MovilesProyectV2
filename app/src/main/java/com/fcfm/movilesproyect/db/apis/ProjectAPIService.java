@@ -16,4 +16,6 @@ public interface ProjectAPIService {
 	@POST( "/api/v1/user/{id}/projects" )
 	Call< Project > registerProject( @Path( "id" ) long id, @Body Project project );
 	
+	@POST( "/api/v1/project/update" )
+	Call< Project > updateProject( @Body Project project );
 }

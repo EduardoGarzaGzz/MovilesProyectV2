@@ -20,6 +20,7 @@ public class RegistrarProjectFragment extends Fragment implements IProjectDashbo
 	
 	private IProjectDashboard.Presenter presenter;
 	private boolean                     status;
+	private Project                     project;
 	
 	private EditText title;
 	private EditText description;
@@ -42,7 +43,11 @@ public class RegistrarProjectFragment extends Fragment implements IProjectDashbo
 		this.presenter.initViewForm( );
 		
 		if ( this.status ) this.btn_accion.setText( "Agregar" );
-		else this.btn_accion.setText( "Actualizar" );
+		else {
+			this.title.setText( this.project.title );
+			this.description.setText( this.project.description );
+			this.btn_accion.setText( "Actualizar" );
+		}
 		
 		return v;
 	}
@@ -73,10 +78,18 @@ public class RegistrarProjectFragment extends Fragment implements IProjectDashbo
 	@Override
 	public Project getProject( ) {
 		
-		Project project = new Project( );
-		project.setTitle( this.title.getText( ).toString( ).trim( ) );
-		project.setDescription( this.description.getText( ).toString( ).trim( ) );
+		if ( this.project == null ) this.project = new Project(  );
 		
-		return project;
+		this.project.setTitle( this.title.getText( ).toString( ).trim( ) );
+		this.project.setDescription( this.description.getText( ).toString( ).trim( ) );
+		
+		this.project.create_at = null;
+		this.project.update_at = null;
+		return this.project;
+	}
+	
+	@Override
+	public void setProject( Project project ) {
+		this.project = project;
 	}
 }

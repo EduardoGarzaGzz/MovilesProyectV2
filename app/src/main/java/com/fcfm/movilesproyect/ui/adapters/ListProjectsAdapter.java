@@ -69,14 +69,22 @@ public class ListProjectsAdapter extends RecyclerView.Adapter< ListProjectsAdapt
 		
 		public void bind( final Project project, final OnItemClickListener listener ) {
 			
-			Utilidades.printLog( "in bind:  " + project.toString() );
+			Utilidades.printLog( "in bind:  " + project.toString( ) );
 			
 			this.title.setText( project.getTitle( ) );
 			this.description.setText( project.getDescription( ) );
-			this.create_at.setText( project.getCreate_at( ).toString( ) );
 			
-			if ( project.getUpdate_at( ) == null ) this.update_at.setText( project.getCreate_at( ).toString( ) );
-			else this.update_at.setText(  project.getUpdate_at( ).toString( ) );
+			if ( project.create_at != null ) {
+				this.create_at.setText( project.getCreate_at( ).toString( ) );
+				
+				if ( project.getUpdate_at( ) == null )
+					this.update_at.setText( project.getCreate_at( ).toString( ) );
+				else this.update_at.setText( project.getUpdate_at( ).toString( ) );
+			} else {
+				this.create_at.setText( "No registrada" );
+				this.update_at.setText( "No registrada" );
+			}
+			
 			
 			this.content.setOnClickListener( new View.OnClickListener( ) {
 				@Override
