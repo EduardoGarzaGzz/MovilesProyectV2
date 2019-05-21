@@ -9,10 +9,14 @@ import com.fcfm.movilesproyect.db.converters.DataConverter;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity( tableName = "project" )
 public class Project {
+	
+	public static List< Project > projects = new ArrayList<>( );
 	
 	@SerializedName( "id" )
 	@Expose
@@ -93,9 +97,17 @@ public class Project {
 		this.update_at = update_at;
 	}
 	
+	public static Project getProjectById( long id ) {
+		
+		for ( Project project : Project.projects ) {
+			if ( project.id == id ) return project;
+		}
+		
+		return new Project( );
+	}
+	
 	@Override
 	public String toString( ) {
-		return "Project{" + "id=" + id + ", title='" + title + '\'' + ", description='" +
-		       description + '\'' + ", create_at=" + create_at + ", update_at=" + update_at + '}';
+		return this.title;
 	}
 }

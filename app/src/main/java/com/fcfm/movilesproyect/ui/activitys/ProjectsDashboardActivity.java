@@ -14,6 +14,7 @@ import com.fcfm.movilesproyect.configurations.Utilidades;
 import com.fcfm.movilesproyect.presenter.interfaces.IProjectDashboard;
 import com.fcfm.movilesproyect.presenter.ProjectDashboardPresenter;
 import com.fcfm.movilesproyect.ui.fragments.ListaProjectsFragment;
+import com.fcfm.movilesproyect.ui.fragments.ListaTaskFragment;
 
 public class ProjectsDashboardActivity extends AppCompatActivity implements IProjectDashboard.View {
 	

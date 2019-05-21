@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.fcfm.movilesproyect.R;
+import com.fcfm.movilesproyect.ui.activitys.TaskDashboardActivity;
 import com.fcfm.movilesproyect.ui.adapters.InfoMsgAdapter;
 import com.fcfm.movilesproyect.db.apis.InfoMsgAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
@@ -52,7 +53,7 @@ public class DashbordPresenter implements IDashbordMVP.Presenter {
 	public void clickNavigationItem( int item_id ) {
 		
 		if ( R.id.menu_dashbord == item_id )
-			Utilidades.printToast( this.view.getContext( ), "Ya estas en el dashbord" );
+			Utilidades.printToastSuccess( this.view.getContext( ), "Ya estas en el dashbord" );
 		else Utilidades.openActivityWithItemId( this.view.getActivity( ), item_id );
 	}
 	
@@ -118,7 +119,9 @@ public class DashbordPresenter implements IDashbordMVP.Presenter {
 		return new View.OnClickListener( ) {
 			@Override
 			public void onClick( View v ) {
-				// TODO implemetar este evento
+				view.getActivity( )
+				    .startActivity( new Intent( view.getContext( ), TaskDashboardActivity.class ) );
+				view.getActivity( ).finish( );
 			}
 		};
 	}

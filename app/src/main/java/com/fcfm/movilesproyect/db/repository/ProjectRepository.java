@@ -71,7 +71,7 @@ public class ProjectRepository {
 				       if ( response.isSuccessful( ) ) {
 					
 					       Utilidades.printResponseBody( response );
-					       Utilidades.printToast( ctx, "El proyecto se guardo" );
+					       Utilidades.printToastSuccess( ctx, "El proyecto se guardo" );
 					       getAll( );
 				       }
 			       }
@@ -92,7 +92,7 @@ public class ProjectRepository {
 				if ( response.isSuccessful( ) ) {
 					
 					Utilidades.printResponseBody( response );
-					Utilidades.printToast( ctx, "El proyecto se a actualizado" );
+					Utilidades.printToastSuccess( ctx, "El proyecto se a actualizado" );
 					getAll( );
 				}
 			}

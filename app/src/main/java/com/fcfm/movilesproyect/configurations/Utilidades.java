@@ -26,28 +26,35 @@ import com.fcfm.movilesproyect.db.models.User;
 import com.fcfm.movilesproyect.ui.activitys.CitasDashbordActivity;
 import com.fcfm.movilesproyect.ui.activitys.DashbordActivity;
 import com.fcfm.movilesproyect.ui.activitys.ProjectsDashboardActivity;
+import com.fcfm.movilesproyect.ui.activitys.TaskDashboardActivity;
 import com.squareup.picasso.Picasso;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.OutputStream;
+import java.io.*;
 import java.util.UUID;
 
+import es.dmoral.toasty.Toasty;
 import retrofit2.Response;
 
 public class Utilidades {
 	
 	private static String TAG_LOG = "MY_APP";
 	
-	public final static int CODE_PERMISOS      = 1;
+	public final static int CODE_PERMISOS = 1;
 	public final static int CODE_CAMERA_PERFIL = 2;
-	public final static int CODE_CAMERA_FONDO  = 3;
+	public final static int CODE_CAMERA_FONDO = 3;
 	public final static int CODE_GALERY_PERFIL = 4;
-	public final static int CODE_GALERY_FONDO  = 5;
+	public final static int CODE_GALERY_FONDO = 5;
 	
-	public static void printToast( Context ctx, String txt ) {
-		Toast.makeText( ctx, txt, Toast.LENGTH_LONG ).show( );
+	public static void printToastSuccess( Context ctx, String txt ) {
+		Toasty.success( ctx, txt, Toast.LENGTH_LONG, true ).show( );
+	}
+	
+	public static void printToastInfo( Context ctx, String txt ) {
+		Toasty.info( ctx, txt, Toast.LENGTH_LONG, true ).show( );
+	}
+	
+	public static void printToastError( Context ctx, String txt ) {
+		Toasty.error( ctx, txt, Toast.LENGTH_LONG, true ).show( );
 	}
 	
 	public static void printLog( String txt ) {
@@ -74,7 +81,8 @@ public class Utilidades {
 	}
 	
 	public static void setRecuerdame( Context ctx, String txt ) {
-		SharedPreferences prefs = ctx.getSharedPreferences( "recuerdame", Context.MODE_PRIVATE );
+		SharedPreferences prefs = ctx.getSharedPreferences( "recuerdame",
+				Context.MODE_PRIVATE );
 		SharedPreferences.Editor edit_prefs = prefs.edit( );
 		
 		edit_prefs.putString( "cuenta", txt );
@@ -88,14 +96,16 @@ public class Utilidades {
 	
 	public static void setUserInfo( View view ) {
 		ImageView perfil = view.findViewById( R.id.iv_header_navigation_img_user );
-		ImageView fondo  = view.findViewById( R.id.iv_header_navigation_img_background );
-		TextView  nombre = view.findViewById( R.id.tv_header_navigation_name_user );
+		ImageView fondo = view.findViewById( R.id.iv_header_navigation_img_background );
+		TextView nombre = view.findViewById( R.id.tv_header_navigation_name_user );
 		
-		if ( User.getUser_active( ).getImg_perfil( ) != null )
+		if ( User.getUser_active( ).getImg_perfil( ) != null ) {
 			Picasso.get( ).load( User.getUser_active( ).getImg_perfil_uri( ) ).into( perfil );
+		}
 		
-		if ( User.getUser_active( ).getImg_fondo( ) != null )
+		if ( User.getUser_active( ).getImg_fondo( ) != null ) {
 			Picasso.get( ).load( User.getUser_active( ).getImg_fondo_uri( ) ).into( fondo );
+		}
 		
 		nombre.setText( User.getUser_active( ).getNombres( ) );
 	}
@@ -121,6 +131,10 @@ public class Utilidades {
 				view.startActivity( new Intent( view, DashbordActivity.class ) );
 				view.finish( );
 				break;
+			case R.id.menu_task:
+				view.startActivity( new Intent( view, TaskDashboardActivity.class ) );
+				view.finish( );
+				break;
 			case R.id.menu_proyectos:
 				view.startActivity( new Intent( view, ProjectsDashboardActivity.class ) );
 				view.finish( );
@@ -135,16 +149,16 @@ public class Utilidades {
 	public static void checkPermisos( AppCompatActivity activity ) {
 		
 		String[] permisos = new String[]{ Manifest.permission.CAMERA, Manifest.permission.INTERNET,
-		                                  Manifest.permission.WRITE_EXTERNAL_STORAGE,
-		                                  Manifest.permission.ACCESS_NETWORK_STATE,
-		                                  Manifest.permission.ACCESS_FINE_LOCATION,
-		                                  Manifest.permission.ACCESS_COARSE_LOCATION,
-		                                  Manifest.permission.READ_EXTERNAL_STORAGE };
+				Manifest.permission.WRITE_EXTERNAL_STORAGE,
+				Manifest.permission.ACCESS_NETWORK_STATE,
+				Manifest.permission.ACCESS_FINE_LOCATION,
+				Manifest.permission.ACCESS_COARSE_LOCATION,
+				Manifest.permission.READ_EXTERNAL_STORAGE };
 		
 		for ( String permiso : permisos ) {
 			
 			if ( ContextCompat.checkSelfPermission( activity, permiso ) ==
-			     PackageManager.PERMISSION_DENIED ) {
+					PackageManager.PERMISSION_DENIED ) {
 				ActivityCompat.requestPermissions( activity, permisos, Utilidades.CODE_PERMISOS );
 			}
 			
@@ -166,21 +180,29 @@ public class Utilidades {
 		try {
 			OutputStream stream = new ByteArrayOutputStream( );
 			
-			if ( bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream ) ) {
-				File file = new File( activity.getCacheDir( ),
-				                      UUID.randomUUID( ).toString( ) + ".png" );
-				
-				if ( file.createNewFile( ) ) {
-					FileOutputStream fos = new FileOutputStream( file );
-					fos.write( ( ( ByteArrayOutputStream ) stream ).toByteArray( ) );
-					fos.flush( );
-					fos.close( );
-					
-					return file;
-				}
-			}
-		}catch ( Exception e ) {
+			File file = getFile( activity, bitmap, stream );
+			
+			if ( file != null ) return file;
+			
+		} catch ( Exception e ) {
 			e.printStackTrace( );
+		}
+		return null;
+	}
+	
+	private static File getFile( AppCompatActivity activity, Bitmap bitmap, OutputStream stream ) throws IOException {
+		if ( bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream ) ) {
+			File file = new File( activity.getCacheDir( ),
+					UUID.randomUUID( ).toString( ) + ".png" );
+			
+			if ( file.createNewFile( ) ) {
+				FileOutputStream fos = new FileOutputStream( file );
+				fos.write( ( ( ByteArrayOutputStream ) stream ).toByteArray( ) );
+				fos.flush( );
+				fos.close( );
+				
+				return file;
+			}
 		}
 		return null;
 	}
@@ -188,31 +210,20 @@ public class Utilidades {
 	public static File createFileDrawable( AppCompatActivity activity, Drawable drawable ) {
 		try {
 			OutputStream stream = new ByteArrayOutputStream( );
-			Bitmap       bitmap = ( ( BitmapDrawable ) drawable ).getBitmap( );
+			Bitmap bitmap = ( ( BitmapDrawable ) drawable ).getBitmap( );
 			
 			if ( bitmap.getByteCount( ) >= 10485760 ) {
-				Utilidades.printToast( activity.getApplicationContext( ),
-				                       "La imagen es demaciado grande elija otra." );
+				Utilidades.printToastSuccess( activity.getApplicationContext( ),
+						"La imagen es demaciado grande elija otra." );
 				return null;
 			}
 			
 			Utilidades.printLog( String.valueOf( bitmap.getByteCount( ) ) );
 			
-			if ( bitmap.compress( Bitmap.CompressFormat.PNG, 100, stream ) ) {
-				File file = new File( activity.getCacheDir( ),
-				                      UUID.randomUUID( ).toString( ) + ".png" );
-				
-				if ( file.createNewFile( ) ) {
-					FileOutputStream fos = new FileOutputStream( file );
-					fos.write( ( ( ByteArrayOutputStream ) stream ).toByteArray( ) );
-					fos.flush( );
-					fos.close( );
-					
-					return file;
-				}
-			}
+			File file = getFile( activity, bitmap, stream );
+			if ( file != null ) return file;
 			
-		}catch ( Exception e ) {
+		} catch ( Exception e ) {
 			e.printStackTrace( );
 		}
 		

@@ -1,9 +1,6 @@
 package com.fcfm.movilesproyect.db.models;
 
-import android.arch.persistence.room.ColumnInfo;
-import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.PrimaryKey;
-import android.arch.persistence.room.TypeConverters;
+import android.arch.persistence.room.*;
 
 import com.fcfm.movilesproyect.db.converters.DataConverter;
 import com.google.gson.annotations.Expose;
@@ -11,7 +8,7 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.Date;
 
-@Entity( tableName = "task")
+@Entity( tableName = "task" )
 public class TaskEntity {
 	
 	@SerializedName( "id" )
@@ -33,7 +30,9 @@ public class TaskEntity {
 	@SerializedName( "urgency" )
 	@Expose
 	@ColumnInfo( name = "urgency" )
-	public int urgency;
+	public String urgency;
+	
+	public long projectId;
 	
 	@SerializedName( "final_date" )
 	@Expose
@@ -53,10 +52,12 @@ public class TaskEntity {
 	@TypeConverters( DataConverter.class )
 	public Date update_at;
 	
+
 	public TaskEntity( ) {
 	}
 	
-	public TaskEntity( long id, String title, String description, int urgency, Date final_date,
+	@Ignore
+	public TaskEntity( long id, String title, String description, String urgency, Date final_date,
 	                   Date create_at, Date update_at ) {
 		this.id = id;
 		this.title = title;
@@ -91,11 +92,11 @@ public class TaskEntity {
 		this.description = description;
 	}
 	
-	public int getUrgency( ) {
+	public String getUrgency( ) {
 		return urgency;
 	}
 	
-	public void setUrgency( int urgency ) {
+	public void setUrgency( String urgency ) {
 		this.urgency = urgency;
 	}
 	
@@ -126,7 +127,7 @@ public class TaskEntity {
 	@Override
 	public String toString( ) {
 		return "TaskEntity{" + "id=" + id + ", title='" + title + '\'' + ", description='" +
-		       description + '\'' + ", urgency=" + urgency + ", final_date=" + final_date +
-		       ", create_at=" + create_at + ", update_at=" + update_at + '}';
+				description + '\'' + ", urgency=" + urgency + ", final_date=" + final_date +
+				", create_at=" + create_at + ", update_at=" + update_at + '}';
 	}
 }

@@ -107,11 +107,11 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 			return MultipartBody.Part.createFormData( "file", file.getName( ), request );
 		}catch ( NullPointerException e ) {
 			e.printStackTrace( );
-			Utilidades.printToast( view.getActivity( ), "Seleccione una imagen porfavor" );
+			Utilidades.printToastSuccess( view.getActivity( ), "Seleccione una imagen porfavor" );
 			return null;
 		}catch ( Exception e ) {
 			e.printStackTrace( );
-			Utilidades.printToast( view.getActivity( ), "Error vuelva a intentarlo" );
+			Utilidades.printToastSuccess( view.getActivity( ), "Error vuelva a intentarlo" );
 			return null;
 		}
 	}
@@ -132,7 +132,7 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 						   if ( response.isSuccessful( ) ) {
 							
 							   Utilidades.printResponseBody( response );
-							   Utilidades.printToast( view.getContext( ),
+							   Utilidades.printToastSuccess( view.getContext( ),
 							                          "La imagen se a actualizado" );
 						   }
 					   }
@@ -161,7 +161,7 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 						   if ( response.isSuccessful( ) ) {
 							
 							   Utilidades.printResponseBody( response );
-							   Utilidades.printToast( view.getContext( ),
+							   Utilidades.printToastSuccess( view.getContext( ),
 							                          "La imagen se a actualizado" );
 						   }
 					   }
@@ -194,7 +194,7 @@ public class EditUserPresenter implements IEditUserMVP.Presenter {
 							
 							User.setUser_active( response.body() );
 							
-							Utilidades.printToast( view.getContext( ),
+							Utilidades.printToastSuccess( view.getContext( ),
 							                       "Se a actualizado correctamente" );
 							view.getActivity( ).finish( );
 						}

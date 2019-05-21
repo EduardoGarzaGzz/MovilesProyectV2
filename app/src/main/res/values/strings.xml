@@ -1,9 +1,15 @@
 <resources>
-    <string name = "app_name">MovilesProyect</string>
-	
-	<!-- TODO: Remove or change this placeholder text -->
-	<string name = "hello_blank_fragment">Hello blank fragment</string>
-	<string name = "google_maps_key" templateMergeStrategy = "preserve" translatable = "false">
-		AIzaSyC2RUCM9yAl290xk9ds1q99IMg6Z84JfVc
-	</string>
+    <string name="app_name">MovilesProyect</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
+        AIzaSyC2RUCM9yAl290xk9ds1q99IMg6Z84JfVc
+    </string>
+
+    <string-array name="urgency">
+        <item>Baja</item>
+        <item>Media</item>
+        <item>Alta</item>
+    </string-array>
 </resources>

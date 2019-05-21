@@ -10,7 +10,7 @@ import com.fcfm.movilesproyect.db.dao.TaskDao;
 import com.fcfm.movilesproyect.db.models.Project;
 import com.fcfm.movilesproyect.db.models.TaskEntity;
 
-@Database( entities = { Project.class, TaskEntity.class }, version = 2 )
+@Database( entities = { Project.class, TaskEntity.class }, version = 4 )
 public abstract class ConfigRoomDatabase extends RoomDatabase {
 	
 	public abstract ProjectDao projectDao( );
@@ -24,7 +24,9 @@ public abstract class ConfigRoomDatabase extends RoomDatabase {
 			synchronized ( ConfigRoomDatabase.class ) {
 				if ( ConfigRoomDatabase.INSTANCE == null )
 					ConfigRoomDatabase.INSTANCE = Room.databaseBuilder(
-							ctx.getApplicationContext( ), ConfigRoomDatabase.class, "DB" ).build( );
+							ctx.getApplicationContext( ), ConfigRoomDatabase.class, "DB" )
+					                                  .fallbackToDestructiveMigration()
+					                                  .build( );
 			}
 		}
 		

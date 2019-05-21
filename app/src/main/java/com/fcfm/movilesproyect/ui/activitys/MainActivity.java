@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements IMainMVP.View {
 	
 	@Override
 	public void showBienvenida( ) {
-		Utilidades.printToast( this, "Bienvenido " + User.getUser_active( ).getNombres( ) );
+		Utilidades.printToastSuccess( this, "Bienvenido " + User.getUser_active( ).getNombres( ) );
 	}
 	
 	

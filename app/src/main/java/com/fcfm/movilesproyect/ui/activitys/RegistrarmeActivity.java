@@ -81,12 +81,12 @@ public class RegistrarmeActivity extends AppCompatActivity implements IRegistrar
 	
 	@Override
 	public void showBienvenida( String nombre ) {
-		Utilidades.printToast( this, "Bienvenido " + nombre );
+		Utilidades.printToastSuccess( this, "Bienvenido " + nombre );
 	}
 	
 	@Override
 	public void showError( String txt ) {
-		Utilidades.printToast( this, txt );
+		Utilidades.printToastSuccess( this, txt );
 	}
 	
 	@Override

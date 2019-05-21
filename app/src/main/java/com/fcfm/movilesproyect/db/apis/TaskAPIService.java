@@ -10,12 +10,13 @@ import retrofit2.http.Path;
 
 public interface TaskAPIService {
 	
-	@GET( "/api/v1/projects/{id}/tasks\"" )
-	Call< TaskEntity[] > getProjects( @Path( "id" ) long id );
+	@GET( "/api/v1/user/{id}/tasks" )
+	Call< TaskEntity[] > getTaskByUserId( @Path( "id" ) long id );
 	
 	@POST( "/api/v1/project/{id}/task" )
-	Call< TaskEntity > registerProject( @Path( "id" ) long id, @Body TaskEntity task );
+	Call< TaskEntity[] > registerProject( @Path( "id" ) long id, @Body TaskEntity task );
 	
-	@POST( "/api/v1/task/update" )
-	Call< TaskEntity > updateProject( @Body TaskEntity task );
+	@POST( "/api/v1/task/update/{id}" )
+	Call< TaskEntity[] > updateProject( @Path( "id" ) long id, @Body TaskEntity task );
+	
 }

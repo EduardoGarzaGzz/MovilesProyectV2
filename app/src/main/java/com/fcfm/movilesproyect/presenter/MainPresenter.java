@@ -17,7 +17,7 @@ import retrofit2.Response;
 
 public class MainPresenter implements IMainMVP.Presenter {
 	
-	private IMainMVP.View  view;
+	private IMainMVP.View view;
 	private IMainMVP.Model model;
 	
 	private UserAPIService service;
@@ -27,10 +27,10 @@ public class MainPresenter implements IMainMVP.Presenter {
 		this.model = new User( );
 	}
 	
-	private boolean checkLastLogin( SharedPreferences preferences ) {
+	private boolean checkLastLogin( Context ctx, SharedPreferences preferences ) {
 		
 		Date login, hoy = null;
-		int  diferencia = 0;
+		int diferencia = 0;
 		
 		try {
 			login = new Date( preferences.getString( "login_fecha", "NULL" ) );
@@ -38,8 +38,8 @@ public class MainPresenter implements IMainMVP.Presenter {
 			
 			diferencia = ( int ) ( ( hoy.getTime( ) - login.getTime( ) ) / 1000 );
 			
-			int dias    = 0;
-			int horas   = 0;
+			int dias = 0;
+			int horas = 0;
 			int minutos = 0;
 			
 			if ( diferencia > 86400 ) {
@@ -57,14 +57,15 @@ public class MainPresenter implements IMainMVP.Presenter {
 			
 			Utilidades.printLog(
 					"Hay " + dias + " dias, " + horas + " horas, " + minutos + " minutos y " +
-					diferencia + " segundos de diferencia" );
+							diferencia + " segundos de diferencia" );
 			
 			if ( minutos > 30 ) {
 				Utilidades.printLog( "Tiene que volver al log" );
+				Utilidades.printToastInfo( ctx, "La session expiro" );
 				return false;
 			}
 			
-		}catch ( Exception e ) {
+		} catch ( Exception e ) {
 			e.printStackTrace( );
 		}
 		
@@ -87,38 +88,39 @@ public class MainPresenter implements IMainMVP.Presenter {
 		
 		if ( ! preferences.getString( "login_status", "NULL" ).equals( "true" ) ) return;
 		
-		if ( preferences.getString( "login_fecha", "NULL" ).equals( "NULL" ) ) return;
-		else {
-			if ( ! this.checkLastLogin( preferences ) ) return;
+		if ( preferences.getString( "login_fecha", "NULL" ).equals( "NULL" ) ) {
+			return;
+		} else {
+			if ( ! this.checkLastLogin( ctx, preferences ) ) return;
 		}
 		
 		this.service.getUser( preferences.getString( "id_user", "0" ) )
-		            .enqueue( new Callback< User >( ) {
-			            @Override
-			            public void onResponse( Call< User > call, Response< User > response ) {
-				
-				            if ( response.isSuccessful( ) ) {
-					            Utilidades.printResponseBody( response );
-					
-					            User tmp_user = response.body( );
-					
-					            if ( tmp_user.getId( ) != 0 &&
-					                 ! tmp_user.getCorreo( ).equals( "null" ) ) {
+				.enqueue( new Callback< User >( ) {
+					@Override
+					public void onResponse( Call< User > call, Response< User > response ) {
 						
-						            model.setUserActivo( tmp_user );
-						            view.showBienvenida( );
-						            view.redirectDashbord( );
-					            }
+						if ( response.isSuccessful( ) ) {
+							Utilidades.printResponseBody( response );
+							
+							User tmp_user = response.body( );
+							
+							if ( tmp_user.getId( ) != 0 &&
+									! tmp_user.getCorreo( ).equals( "null" ) ) {
+								
+								model.setUserActivo( tmp_user );
+								view.showBienvenida( );
+								view.redirectDashbord( );
+							}
+							
+						}
+						
+					}
 					
-				            }
-				
-			            }
-			
-			            @Override
-			            public void onFailure( Call< User > call, Throwable t ) {
-				            Utilidades.failPeticionApi( t );
-			            }
-		            } );
+					@Override
+					public void onFailure( Call< User > call, Throwable t ) {
+						Utilidades.failPeticionApi( t );
+					}
+				} );
 		
 	}
 }

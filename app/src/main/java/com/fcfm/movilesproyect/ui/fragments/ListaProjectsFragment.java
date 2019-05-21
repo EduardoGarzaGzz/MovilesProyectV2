@@ -42,10 +42,10 @@ public class ListaProjectsFragment extends Fragment implements IProjectDashboard
 		// Inflate the layout for this fragment
 		View v = inflater.inflate( R.layout.fragment_lista_projects, container, false );
 		
-		this.no_hay = ( TextView ) v.findViewById( R.id.tv_frac_lista_projects_no_hay );
-		this.serch = ( EditText ) v.findViewById( R.id.ed_frac_lista_projects_serch );
-		this.recycler_view = ( RecyclerView ) v.findViewById( R.id.rv_frac_lista_projects_list );
-		this.btn_agregar = ( Button ) v.findViewById( R.id.btn_frac_lista_projects_add );
+		this.no_hay = ( TextView ) v.findViewById( R.id.tv_frac_lista_task_no_hay );
+		this.serch = ( EditText ) v.findViewById( R.id.ed_frac_lista_task_serch );
+		this.recycler_view = ( RecyclerView ) v.findViewById( R.id.rv_frac_lista_task_list );
+		this.btn_agregar = ( Button ) v.findViewById( R.id.btn_frac_lista_task_add );
 		
 		this.layout_manager = new LinearLayoutManager( getContext( ) );
 		this.adapter = new ListProjectsAdapter( this.presenter.clickItemListProject( ) );

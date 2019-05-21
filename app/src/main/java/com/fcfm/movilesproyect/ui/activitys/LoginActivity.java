@@ -112,12 +112,12 @@ public class LoginActivity extends AppCompatActivity implements ILoginMVP.View {
 	
 	@Override
 	public void showGoodLogin( ) {
-		Utilidades.printToast( this, "Bienvenido " + User.getUser_active( ).getNombres( ) );
+		Utilidades.printToastSuccess( this, "Bienvenido " + User.getUser_active( ).getNombres( ) );
 	}
 	
 	@Override
 	public void showError( String txt ) {
-		Utilidades.printToast( this, txt );
+		Utilidades.printToastSuccess( this, txt );
 	}
 	
 	@Override

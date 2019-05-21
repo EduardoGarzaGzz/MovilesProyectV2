@@ -111,7 +111,7 @@ public class EditUserActivity extends AppCompatActivity implements IEditUserMVP.
 		super.onRequestPermissionsResult( requestCode, permissions, grantResults );
 		
 		if ( requestCode == Utilidades.CODE_PERMISOS )
-			Utilidades.printToast( this, "Perfecto continuemos" );
+			Utilidades.printToastSuccess( this, "Perfecto continuemos" );
 	}
 	
 	@Override

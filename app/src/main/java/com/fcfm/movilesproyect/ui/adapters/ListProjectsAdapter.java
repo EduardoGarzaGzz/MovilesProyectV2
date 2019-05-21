@@ -33,8 +33,7 @@ public class ListProjectsAdapter extends RecyclerView.Adapter< ListProjectsAdapt
 	                                                          int i ) {
 		View v = LayoutInflater.from( viewGroup.getContext( ) )
 		                       .inflate( this.layaout, viewGroup, false );
-		ViewHolder vh = new ViewHolder( v );
-		return vh;
+		return new ViewHolder( v );
 	}
 	
 	@Override
