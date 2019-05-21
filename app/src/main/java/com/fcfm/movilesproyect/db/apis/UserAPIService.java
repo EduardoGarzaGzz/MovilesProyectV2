@@ -1,5 +1,6 @@
 package com.fcfm.movilesproyect.db.apis;
 
+import com.fcfm.movilesproyect.db.models.CitaEntity;
 import com.fcfm.movilesproyect.db.models.User;
 
 
@@ -11,6 +12,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.Path;
+
+import java.util.List;
 
 public interface UserAPIService {
 	
@@ -37,4 +40,9 @@ public interface UserAPIService {
 	@POST( "/api/v1/{id}/save_img_fondo" )
 	Call< User > saveImgFondo( @Path( "id" ) long id, @Part MultipartBody.Part file );
 	
+	@GET( "/api/v1/user/{id}/getcitas" )
+	Call< CitaEntity[] > getCitas( @Path( "id" ) long id );
+	
+	@POST( "/api/v1/user/{id}/addcita" )
+	Call< CitaEntity > addCita( @Path( "id" ) long id, @Body CitaEntity cita );
 }

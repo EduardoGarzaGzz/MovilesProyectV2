@@ -9,16 +9,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.fcfm.movilesproyect.R;
+import com.fcfm.movilesproyect.presenter.interfaces.ICitaDashboardMVP;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ListaCitasFragment extends Fragment {
+public class ListaCitasFragment extends Fragment implements ICitaDashboardMVP.View.ListCita {
 	
-	
+	private ICitaDashboardMVP.Presenter presenter;
 	private Button btn_agregar;
 	
-	public ListaCitasFragment( ) { }
+	public ListaCitasFragment( ) {
+	}
 	
 	@Override
 	public View onCreateView( LayoutInflater inflater, ViewGroup container,
@@ -28,6 +30,8 @@ public class ListaCitasFragment extends Fragment {
 		
 		this.btn_agregar = v.findViewById( R.id.btn_frag_lista_citas_agregar );
 		
+		this.presenter.initListaCita( );
+		
 		return v;
 	}
 	
@@ -35,13 +39,16 @@ public class ListaCitasFragment extends Fragment {
 	public void onStart( ) {
 		super.onStart( );
 		
-		this.btn_agregar.setOnClickListener( new View.OnClickListener( ) {
-			@Override
-			public void onClick( View v ) {
-				getActivity( ).getSupportFragmentManager( ).beginTransaction( )
-				              .replace( R.id.frag_dashbord_citas_content,
-				                        new RegistrarCitsaFragment( ) ).commit( );
-			}
-		} );
+		this.btn_agregar.setOnClickListener( this.presenter.clickAgregarCita( ) );
+	}
+	
+	@Override
+	public ListaCitasFragment getFragment( ) {
+		return this;
+	}
+	
+	@Override
+	public void setPresenter( ICitaDashboardMVP.Presenter presenter ) {
+		this.presenter = presenter;
 	}
 }
