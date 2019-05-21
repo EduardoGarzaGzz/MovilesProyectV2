@@ -184,7 +184,7 @@ public class ProjectDashboardPresenter implements IProjectDashboard.Presenter {
 			@Override
 			public boolean onNavigationItemSelected( @NonNull MenuItem menuItem ) {
 				if ( R.id.menu_proyectos == menuItem.getItemId( ) )
-					Utilidades.printToastSuccess( view.getContext( ), "Ya estas en proyectos" );
+					Utilidades.printToastInfo( view.getContext( ), "Ya estas en proyectos" );
 				else
 					Utilidades.openActivityWithItemId( view.getActivity( ), menuItem.getItemId( ) );
 				

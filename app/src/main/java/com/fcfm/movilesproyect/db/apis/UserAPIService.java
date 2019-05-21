@@ -45,4 +45,7 @@ public interface UserAPIService {
 	
 	@POST( "/api/v1/user/{id}/addcita" )
 	Call< CitaEntity > addCita( @Path( "id" ) long id, @Body CitaEntity cita );
+	
+	@POST( "/api/v1/cita/update" )
+	Call< CitaEntity > updateCita( @Body CitaEntity cita );
 }

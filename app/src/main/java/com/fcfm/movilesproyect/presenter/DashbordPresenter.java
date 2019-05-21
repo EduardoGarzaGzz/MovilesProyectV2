@@ -9,7 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.fcfm.movilesproyect.R;
-import com.fcfm.movilesproyect.ui.activitys.TaskDashboardActivity;
+import com.fcfm.movilesproyect.db.models.CitaEntity;
+import com.fcfm.movilesproyect.ui.activitys.*;
 import com.fcfm.movilesproyect.ui.adapters.InfoMsgAdapter;
 import com.fcfm.movilesproyect.db.apis.InfoMsgAPIService;
 import com.fcfm.movilesproyect.configurations.ApiUtils;
@@ -17,9 +18,6 @@ import com.fcfm.movilesproyect.configurations.Utilidades;
 import com.fcfm.movilesproyect.presenter.interfaces.IDashbordMVP;
 import com.fcfm.movilesproyect.db.models.InfoMessages;
 import com.fcfm.movilesproyect.db.models.User;
-import com.fcfm.movilesproyect.ui.activitys.EditUserActivity;
-import com.fcfm.movilesproyect.ui.activitys.MainActivity;
-import com.fcfm.movilesproyect.ui.activitys.ProjectsDashboardActivity;
 
 import java.util.Arrays;
 
@@ -141,7 +139,9 @@ public class DashbordPresenter implements IDashbordMVP.Presenter {
 		return new View.OnClickListener( ) {
 			@Override
 			public void onClick( View v ) {
-				// TODO implemetar este evento
+				view.getActivity( )
+						.startActivity( new Intent( view.getContext( ), CitasDashbordActivity.class ) );
+				view.getActivity( ).finish( );
 			}
 		};
 	}

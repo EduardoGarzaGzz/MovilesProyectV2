@@ -33,4 +33,13 @@ public class CitaViewModel extends AndroidViewModel {
 		
 		this.citaRespository.addCita( ctx, citaEntity );
 	}
+	
+	public void updateCita( Context ctx, CitaEntity citaEntity ) {
+		
+		if ( citaEntity.title == null || citaEntity.title.equals( "" ) || citaEntity.title.length( ) < 2 ) {
+			Utilidades.printToastError( ctx, "El titulo no puede estar vacio" );
+		}
+		
+		this.citaRespository.updateCita( ctx, citaEntity );
+	}
 }

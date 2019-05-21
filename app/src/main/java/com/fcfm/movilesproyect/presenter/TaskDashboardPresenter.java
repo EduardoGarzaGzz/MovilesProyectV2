@@ -155,7 +155,7 @@ public class TaskDashboardPresenter implements ITaskDashboardMVP.Presenter {
 			@Override
 			public boolean onNavigationItemSelected( @NonNull MenuItem menuItem ) {
 				if ( R.id.menu_task == menuItem.getItemId( ) ) {
-					Utilidades.printToastSuccess( view.getContext( ), "Ya estas en tareas" );
+					Utilidades.printToastInfo( view.getContext( ), "Ya estas en tareas" );
 				} else {
 					Utilidades.openActivityWithItemId( view.getActivity( ), menuItem.getItemId( ) );
 				}

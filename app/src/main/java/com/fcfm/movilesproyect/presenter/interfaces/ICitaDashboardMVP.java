@@ -1,6 +1,8 @@
 package com.fcfm.movilesproyect.presenter.interfaces;
 
 import android.content.Context;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import com.fcfm.movilesproyect.ui.fragments.ListaCitasFragment;
@@ -37,6 +39,10 @@ public interface ICitaDashboardMVP {
 		
 		void initCitaDashboard( );
 		
+		DrawerLayout.DrawerListener clickDrawerListener( );
+		
+		NavigationView.OnNavigationItemSelectedListener clickNavigationView( );
+		
 		void initListaCita( );
 		
 		void initFormCita( );
@@ -46,6 +52,8 @@ public interface ICitaDashboardMVP {
 		android.view.View.OnClickListener clickActionCita( );
 		
 		android.view.View.OnClickListener clickCancelCita( );
+		
+		android.view.View.OnClickListener clickDate( final RegistrarCitsaFragment fragment );
 	}
 	
 	interface Model {

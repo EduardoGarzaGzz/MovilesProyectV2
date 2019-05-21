@@ -26,7 +26,7 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 	
 	private IDashbordMVP.Presenter presenter;
 	
-	private DrawerLayout   drawerLayout;
+	private DrawerLayout drawerLayout;
 	private NavigationView navigationView;
 	
 	@Override
@@ -74,7 +74,12 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 				new NavigationView.OnNavigationItemSelectedListener( ) {
 					@Override
 					public boolean onNavigationItemSelected( @NonNull MenuItem menuItem ) {
-						presenter.clickNavigationItem( menuItem.getItemId( ) );
+						if ( R.id.menu_dashbord == menuItem.getItemId( ) ) {
+							Utilidades.printToastInfo( getContext( ), "Ya estas en el dashboard" );
+						} else {
+							Utilidades.openActivityWithItemId( getActivity( ), menuItem.getItemId( ) );
+						}
+						
 						return true;
 					}
 				} );
@@ -83,8 +88,11 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 	@Override
 	public boolean onOptionsItemSelected( MenuItem item ) {
 		
-		if ( this.presenter.clickOptionItem( this.drawerLayout, item.getItemId( ) ) ) return true;
-		else return super.onOptionsItemSelected( item );
+		if ( this.presenter.clickOptionItem( this.drawerLayout, item.getItemId( ) ) ) {
+			return true;
+		} else {
+			return super.onOptionsItemSelected( item );
+		}
 	}
 	
 	@Override
@@ -110,7 +118,7 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 	@Override
 	public void setTabLayaout( ) {
 		
-		TabLayout       tab_layout = ( TabLayout ) findViewById( R.id.tab_layout );
+		TabLayout tab_layout = ( TabLayout ) findViewById( R.id.tab_layout );
 		final ViewPager view_pager = ( ViewPager ) findViewById( R.id.view_pager );
 		
 		tab_layout.addTab( tab_layout.newTab( ).setText( "Opciones" ) );
@@ -120,8 +128,8 @@ public class DashbordActivity extends AppCompatActivity implements IDashbordMVP.
 		
 		
 		PagerDashbordAdapter pager_adapter = new PagerDashbordAdapter( getSupportFragmentManager( ),
-		                                                               tab_layout.getTabCount( ),
-		                                                               this.presenter );
+				tab_layout.getTabCount( ),
+				this.presenter );
 		
 		view_pager.setAdapter( pager_adapter );
 		view_pager.addOnPageChangeListener(

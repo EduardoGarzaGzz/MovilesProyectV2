@@ -74,6 +74,28 @@ public class CitaRespository {
 		
 	}
 	
+	public void updateCita( final Context ctx, CitaEntity citaEntity ) {
+		
+		this.userAPIService.updateCita( citaEntity ).enqueue( new Callback< CitaEntity >( ) {
+			@Override
+			public void onResponse( Call< CitaEntity > call, Response< CitaEntity > response ) {
+				Utilidades.printResponseCode( response );
+				
+				if ( response.isSuccessful( ) ) {
+					Utilidades.printResponseBody( response );
+					Utilidades.printToastSuccess( ctx, "La cita se a actualizado" );
+					
+					getAll( );
+				}
+			}
+			
+			@Override
+			public void onFailure( Call< CitaEntity > call, Throwable t ) {
+				Utilidades.failPeticionApi( t );
+			}
+		} );
+	}
+	
 	private static class InsertAsyncCita extends AsyncTask< CitaEntity, Void, Void > {
 		
 		private CitaDao citaDao;

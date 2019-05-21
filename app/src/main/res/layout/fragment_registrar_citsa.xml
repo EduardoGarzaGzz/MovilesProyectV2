@@ -63,17 +63,18 @@
 			android:layout_width="wrap_content"
 			android:layout_height="wrap_content"
 			android:layout_weight="1"
-			android:text="Lat:"/></LinearLayout><Button
-	android:id = "@+id/btn_frag_form_citas_action"
-	android:layout_width = "0dp"
-	android:layout_height = "wrap_content"
-	android:layout_marginStart = "8dp"
-	android:layout_marginTop = "8dp"
-	android:layout_marginEnd = "8dp"
-	android:text = "Agregar"
-	app:layout_constraintEnd_toEndOf = "parent"
-	app:layout_constraintStart_toStartOf = "parent"
-	app:layout_constraintTop_toBottomOf = "@+id/linearLayout" />
+			android:text="Lat:"/></LinearLayout>
+	<Button
+			android:id="@+id/btn_frag_form_citas_action"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="8dp"
+			android:layout_marginEnd="8dp"
+			android:text="Agregar"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintHorizontal_bias="1.0" android:layout_marginTop="8dp"
+			app:layout_constraintTop_toBottomOf="@+id/date_frag_citas_date"/>
 	<Button
 			android:id="@+id/btn_frag_form_citas_cancel"
 			android:layout_width="0dp"
@@ -84,4 +85,14 @@
 			android:text="Cancelar"
 			app:layout_constraintEnd_toEndOf="parent"
 			app:layout_constraintStart_toStartOf="parent"
-			app:layout_constraintTop_toBottomOf="@+id/btn_frag_form_citas_action"/></android.support.constraint.ConstraintLayout></FrameLayout>
+			app:layout_constraintTop_toBottomOf="@+id/btn_frag_form_citas_action"/>
+	<EditText
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:inputType="date"
+			android:ems="10"
+			android:id="@+id/date_frag_citas_date" app:layout_constraintEnd_toEndOf="parent"
+			android:layout_marginEnd="8dp" app:layout_constraintStart_toStartOf="parent"
+			android:layout_marginStart="8dp" android:hint="Fecha" android:layout_marginTop="8dp"
+			app:layout_constraintTop_toBottomOf="@+id/linearLayout"/>
+</android.support.constraint.ConstraintLayout></FrameLayout>

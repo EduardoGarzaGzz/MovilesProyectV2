@@ -4,6 +4,7 @@ package com.fcfm.movilesproyect.ui.fragments;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.location.Geocoder;
 import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.fcfm.movilesproyect.R;
+import com.fcfm.movilesproyect.db.models.CitaEntity;
 import com.fcfm.movilesproyect.presenter.interfaces.ICitaDashboardMVP;
 import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -28,6 +30,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -35,13 +41,16 @@ public class RegistrarCitsaFragment extends Fragment implements OnMapReadyCallba
 	
 	private ICitaDashboardMVP.Presenter presenter;
 	private boolean status;
+	private CitaEntity citaEntity;
 	
 	private MapView mv;
 	private LocationManager locManager;
 	private Location loc;
+	private LatLng latLng;
 	
 	private EditText etTitle;
 	private EditText etDescription;
+	private EditText etDate;
 	private TextView tvLog;
 	private TextView tvLat;
 	private Button btnAction;
@@ -61,6 +70,7 @@ public class RegistrarCitsaFragment extends Fragment implements OnMapReadyCallba
 		
 		this.etTitle = view.findViewById( R.id.et_frag_form_citas_title );
 		this.etDescription = view.findViewById( R.id.et_frag_form_citas_description );
+		this.etDate = view.findViewById( R.id.date_frag_citas_date );
 		this.tvLog = view.findViewById( R.id.tv_frag_form_citas_log );
 		this.tvLat = view.findViewById( R.id.tv_frag_form_citas_lat );
 		this.btnAction = view.findViewById( R.id.btn_frag_form_citas_action );
@@ -104,13 +114,34 @@ public class RegistrarCitsaFragment extends Fragment implements OnMapReadyCallba
 			return;
 		}
 		
-		GoogleMap mapa = googleMap;
+		final GoogleMap mapa = googleMap;
 		LatLng coordinate = new LatLng( this.loc.getLatitude( ), this.loc.getLongitude( ) );
 		
+		setTvLatText( String.valueOf( this.loc.getLatitude( ) ) );
+		setTvLogText( String.valueOf( this.loc.getLongitude( ) ) );
+		
 		mapa.addMarker( new MarkerOptions( ).position( coordinate ).title( "YO" ) );
-		CameraUpdate location = CameraUpdateFactory.newLatLngZoom( coordinate, 15.0f );
+		CameraUpdate location = CameraUpdateFactory.newLatLngZoom( coordinate, 1.0f );
 		mapa.animateCamera( location );
 		mapa.moveCamera( CameraUpdateFactory.newLatLng( coordinate ) );
+		mapa.setMyLocationEnabled( true );
+		
+		mapa.setOnMapClickListener( new GoogleMap.OnMapClickListener( ) {
+			@Override
+			public void onMapClick( LatLng lng ) {
+				mapa.clear( );
+				mapa.addMarker( new MarkerOptions( ).position( lng ).title( "YO" ) );
+				CameraUpdate location = CameraUpdateFactory.newLatLngZoom( lng, 1.0f );
+				mapa.animateCamera( location );
+				mapa.moveCamera( CameraUpdateFactory.newLatLng( lng ) );
+				
+				latLng = lng;
+				
+				setTvLatText( String.valueOf( lng.latitude ) );
+				setTvLogText( String.valueOf( lng.longitude ) );
+				
+			}
+		} );
 	}
 	
 	@Override
@@ -164,6 +195,14 @@ public class RegistrarCitsaFragment extends Fragment implements OnMapReadyCallba
 		return this.status;
 	}
 	
+	public void setTvLogText( String txt ) {
+		this.tvLog.setText( "Log: " + txt );
+	}
+	
+	public void setTvLatText( String txt ) {
+		this.tvLat.setText( "Lat: " + txt );
+	}
+	
 	public EditText getEtTitle( ) {
 		return etTitle;
 	}
@@ -180,11 +219,52 @@ public class RegistrarCitsaFragment extends Fragment implements OnMapReadyCallba
 		return tvLat;
 	}
 	
+	public EditText getEtDate( ) {
+		return etDate;
+	}
+	
+	public void setEtDate( EditText etDate ) {
+		this.etDate = etDate;
+	}
+	
 	public Button getBtnAction( ) {
 		return btnAction;
 	}
 	
 	public Button getBtnCancel( ) {
 		return btnCancel;
+	}
+	
+	public CitaEntity getCitaEntity( ) {
+		if ( this.citaEntity == null ) this.citaEntity = new CitaEntity( );
+		
+		this.citaEntity.title = this.etTitle.getText( ).toString( ).trim( );
+		this.citaEntity.description = this.etDescription.getText( ).toString( ).trim( );
+		this.citaEntity.lat = ( float ) this.latLng.latitude;
+		this.citaEntity.log = ( float ) this.latLng.longitude;
+		
+		try {
+			if ( this.etDate.getText( ).toString( ).equals( "" ) ) {
+				this.citaEntity.date = null;
+			} else {
+				this.citaEntity.date = new Date( String.valueOf( new SimpleDateFormat( "dd/MM/yyyy" ).parse( this.etDate.getText().toString( ) ) ) );
+			}
+		} catch ( ParseException e ) {
+			e.printStackTrace( );
+		}
+		
+		return citaEntity;
+	}
+	
+	public void setCitaEntity( CitaEntity citaEntity ) {
+		this.citaEntity = citaEntity;
+	}
+	
+	public LatLng getLatLng( ) {
+		return latLng;
+	}
+	
+	public void setLatLng( LatLng latLng ) {
+		this.latLng = latLng;
 	}
 }
